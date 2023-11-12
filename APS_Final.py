@@ -2,7 +2,9 @@ import random
 import math
 from tkinter import *
 
-descrypt = "Matheus"
+chave_tradata = []
+
+
 
 # Função para verificar se um número é primo usando o teste de Miller
 def verificador_primo(n, k=5):
@@ -73,6 +75,14 @@ def descriptografar(chave_privada, mensagem_criptografada):
 bits = 28  # Tamanho dos números primos, quanto maior, maior será o numero de cada caracter
 chave_publica, chave_privada = gerar_chaves(bits)
 
+# tratamento da chave privada
+
+chave_tradata.extend(chave_privada)
+
+resultado = ', '.join(map(str, chave_tradata))
+
+chave_final = resultado.replace(',', '').replace(' ', '')
+
 
 def botao_cript():
     
@@ -90,12 +100,13 @@ def botao_cript():
     
     msg_original["text"] = texto_128
     msg_criptografada["text"] = texto_cripto
+    mostrar_chave_2["text"] = chave_final
    
 
 def btn_descript():
             chave = entry_chave.get()
 
-            if chave != descrypt:
+            if chave != chave_final:
                 key = "Chave incorreta"
     
             else:
@@ -126,29 +137,37 @@ entry_msg.grid(column=1, row=1, padx=15, pady=10)
 botao_criptografar = Button(janela, text="Clique para criptografar", command=botao_cript, bg="#151919", fg="white")
 botao_criptografar.grid(column=2, row=1, padx=10)
 
-# Mostrar a menssagem original
+# Mostrar a mensagem original
 msg_original = Label(janela, text="", bg="#151919", fg="white")
 msg_original.grid(column=1, row = 3, pady=10)
 
-# Mostrar a menssagem criptografada
+# Mostrar a mensagem criptografada
 msg_criptografada = Label(janela, text="", bg="#151919", fg="white")
 msg_criptografada.grid(column=1, row=5, pady=10)
+
+# mostrar chave privada
+mostrar_chave = Label(janela, text="Sua Chave: ", bg="#151919", fg="white")
+mostrar_chave.grid(column=0,row=7,padx=10)
+
+mostrar_chave_2 = Label(janela, text="", bg="#151919", fg="white")
+mostrar_chave_2.grid(column=1,row=7,pady=10)
+
 
 # Pedir a chave
 
 pedir_chave = Label(janela, text="Chave: ", bg="#151919", fg="white")
-pedir_chave.grid(column=0, row=7)
+pedir_chave.grid(column=0, row=8)
 entry_chave = Entry(janela, width=130)
-entry_chave.grid(column=1, row=7, padx=15, pady=10)
+entry_chave.grid(column=1, row=8, padx=15, pady=10)
 
 # Botão para descriptografar com a chave
 
 btn_chave = Button(janela, text="Inserir Chave", command=btn_descript, bg="#151919", fg="white")
-btn_chave.grid(column=2, row=7, padx=10)
+btn_chave.grid(column=2, row=8, padx=10)
 
 # Mostrar mensagem descriptografada
 
 mensagem_descriptografada_label = Label(janela, text="", bg="#151919", fg="white")
-mensagem_descriptografada_label.grid(column=1, row=8, pady=20)
+mensagem_descriptografada_label.grid(column=1, row=9, pady=20)
 
 janela = mainloop()
