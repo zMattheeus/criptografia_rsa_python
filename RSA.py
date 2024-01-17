@@ -90,7 +90,11 @@ else:
   mensagem_criptografada = criptografar(chave_publica, mensagem)
   print(f"Mensagem criptografada: {mensagem_criptografada}")
 
+  print(resultado_sem_virgulas_espacos)
+
   chave = input("Digite a Chave de descriptografia: ")
+
+  
   
   if chave != resultado_sem_virgulas_espacos:
     print("Chave incorreta")
